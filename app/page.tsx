@@ -16,7 +16,7 @@ export default async function HomePage() {
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap gap-4">
             <h1 className="text-2xl font-bold text-gray-900">CrowdSolve</h1>
             <div className="flex items-center gap-4">
               {session ? (
@@ -65,7 +65,7 @@ export default async function HomePage() {
             </CardContent>
           </Card>
         ) : (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 ">
             {problems.map((problem: any) => (
               <Link key={problem._id} href={`/problems/${problem._id}`}>
                 <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer">
