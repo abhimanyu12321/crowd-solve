@@ -7,7 +7,14 @@ import { loginAction } from "@/actions/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -55,6 +62,7 @@ export default function LoginPage() {
                 placeholder="your@email.com"
                 required
                 disabled={loading}
+                defaultValue={"test@test.com"}
               />
             </div>
             <div className="space-y-2">
@@ -66,6 +74,7 @@ export default function LoginPage() {
                 placeholder="••••••••"
                 required
                 disabled={loading}
+                defaultValue={"12345678"}
               />
             </div>
           </CardContent>
