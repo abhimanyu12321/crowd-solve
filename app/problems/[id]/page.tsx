@@ -1,18 +1,26 @@
 import { auth } from "@/auth";
 import { fetchProblemById, fetchSolutionsByProblemId } from "@/actions/actions";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import SolutionForm from "@/components/SolutionForm";
 import SolutionCard from "@/components/SolutionCard";
 
-export default async function ProblemDetailPage({
-  params,
-}: {
+type Props = {
   params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+};
+
+export default async function ProblemDetailPage({ params }: Props) {
+  const resolvedParams = await params;
+  const { id } = resolvedParams;
+  
   const session = await auth();
   
   const problemResult = await fetchProblemById(id);

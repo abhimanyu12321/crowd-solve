@@ -128,6 +128,11 @@ export async function fetchProblemById(problemId: string) {
   try {
     await connectDB();
 
+    // Validate ObjectId format
+    if (!problemId || problemId.length !== 24) {
+      return { error: "Invalid problem ID" };
+    }
+
     const problem = await Problem.findById(problemId)
       .populate("createdBy", "email")
       .lean();
