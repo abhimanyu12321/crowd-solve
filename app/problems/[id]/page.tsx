@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import SolutionForm from "@/components/SolutionForm";
 import SolutionCard from "@/components/SolutionCard";
 
@@ -22,6 +22,11 @@ export default async function ProblemDetailPage({ params }: Props) {
   const { id } = resolvedParams;
   
   const session = await auth();
+  
+  // Redirect to login if not authenticated
+  if (!session) {
+    redirect("/login");
+  }
   
   const problemResult = await fetchProblemById(id);
   if (problemResult.error || !problemResult.problem) {
@@ -80,18 +85,7 @@ export default async function ProblemDetailPage({ params }: Props) {
           </div>
 
           {/* Add Solution Form */}
-          {session ? (
-            <SolutionForm problemId={id} />
-          ) : (
-            <Card>
-              <CardContent className="py-8 text-center">
-                <p className="text-gray-600 mb-4">Please login to post a solution</p>
-                <Link href="/login">
-                  <Button>Login</Button>
-                </Link>
-              </CardContent>
-            </Card>
-          )}
+          <SolutionForm problemId={id} />
 
           {/* Solutions List */}
           {solutions.length === 0 ? (
@@ -108,7 +102,7 @@ export default async function ProblemDetailPage({ params }: Props) {
                 <SolutionCard
                   key={solution._id}
                   solution={solution}
-                  isLoggedIn={!!session}
+                  isLoggedIn={true}
                 />
               ))}
             </div>
